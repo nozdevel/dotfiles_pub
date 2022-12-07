@@ -1,20 +1,23 @@
-
-"-----------------------------------------
-"dein Scripts-----------------------------
+" Ward off unexpected things that your distro might have made, as
+" well as sanely reset options when re-sourcing .vimrc
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=/home/hogehoge/.vim/dein/repos/github.com/Shougo/dein.vim
+" Set Dein base path (required)
+let s:dein_base = '~/.local/share/dein'
 
-" Required:
-if dein#load_state('/home/hogehoge/.vim/dein/')
-  call dein#begin('/home/hogehoge/.vim/dein/')
+" Set Dein source path (required)
+let s:dein_src = '~/.local/share/dein/repos/github.com/Shougo/dein.vim'
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/hogehoge/.vim/dein/repos/github.com/Shougo/dein.vim')
+" Set Dein runtime path (required)
+execute 'set runtimepath+=' . s:dein_src
+
+" Call Dein initialization (required)
+if dein#load_state(s:dein_base)
+  call dein#begin(s:dein_base)
+
+  call dein#add(s:dein_src)
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
@@ -65,18 +68,21 @@ if dein#load_state('/home/hogehoge/.vim/dein/')
   call dein#save_state()
 endif
 
-" If you want delete some plugin, enable the blow.
-" and, restart the VIM
-" after restarted, exec this command
-" :call dein#recache_runtimepath()
+" Attempt to determine the type of a file based on its name and possibly its
+" contents. Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+if has('filetype')
+  filetype indent plugin on
+endif
 
-" Required:
-filetype plugin indent on
-syntax enable
+" Enable syntax highlighting
+if has('syntax')
+  syntax on
+endif
 
-" If you want to install not installed plugins on startup.
+" Uncomment if you want to install not-installed plugins on startup.
 if dein#check_install()
-  call dein#install()
+ call dein#install()
 endif
 
 "End dein Scripts-------------------------
