@@ -24,11 +24,15 @@ if dein#load_state(s:dein_base)
   call dein#add('Shougo/neosnippet-snippets')
 
   " auto complete
-  if has('lua')
-    call dein#add('Shougo/neocomplete')
-  else
-    call dein#add('Shougo/neocomplcache.vim')
-  endif
+  call dein#add('Shougo/ddc.vim')
+  call dein#add('vim-denops/denops.vim')
+
+  call dein#add('Shougo/ddc-ui-native')
+  call dein#add('Shougo/ddc-source-around')
+  call dein#add('Shougo/ddc-matcher_head')
+  call dein#add('Shougo/ddc-sorter_rank')
+
+
 
   " utility
   call dein#add('scrooloose/nerdtree')
@@ -94,11 +98,11 @@ runtime! key_bind/*.vim
 runtime! ftplugin/man.vim
 
 " auto complete
-if has('lua')
-  runtime! plugin_conf/neocomp/neocomplete.vim
-else
-  runtime! plugin_conf/neocomp/neocomplcache.vim
-endif
+"if has('lua')
+"  runtime! plugin_conf/neocomp/neocomplete.vim
+"else
+"  runtime! plugin_conf/neocomp/neocomplcache.vim
+"endif
 
 " pathogen
 "execute pathogen#infect()

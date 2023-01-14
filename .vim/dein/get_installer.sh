@@ -1,3 +1,3 @@
 #/bin/sh
 
-wget https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+sh -c "$(wget -O- https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh)"
