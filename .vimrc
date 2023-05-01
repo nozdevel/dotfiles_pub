@@ -4,6 +4,8 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+let g:python3_host_prog = '/usr/bin/python3'
+
 " Set Dein base path (required)
 let s:dein_base = '~/.local/share/dein'
 
@@ -20,8 +22,6 @@ if dein#load_state(s:dein_base)
   call dein#add(s:dein_src)
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
 
   " auto complete
   call dein#add('Shougo/ddc.vim')
@@ -32,6 +32,14 @@ if dein#load_state(s:dein_base)
   call dein#add('Shougo/ddc-matcher_head')
   call dein#add('Shougo/ddc-sorter_rank')
 
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvin')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+  let g:deoplete#enable_at_startup = 1
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
 
 
   " utility
@@ -136,6 +144,7 @@ set incsearch
 set ve=block
 set colorcolumn=100
 set completeopt=menuone
+set backspace=2
 
 " filetype tab / space setting
 if has("autocmd")
