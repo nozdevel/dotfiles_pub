@@ -54,7 +54,8 @@ if dein#load_state(s:dein_base)
   "call dein#add('vim-syntastic/syntastic')
   call dein#add('soramugi/auto-ctags.vim')
 
-  call dein#add('fholgado/minibufexpl.vim')
+  "call dein#add('fholgado/minibufexpl.vim')
+  call dein#add('nozdevel/minibufexpl.vim')
   call dein#add('junegunn/fzf.vim')
 
   " status line
