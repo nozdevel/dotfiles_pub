@@ -25,21 +25,22 @@ if dein#load_state(s:dein_base)
 
   " auto complete
   call dein#add('Shougo/ddc.vim')
-  call dein#add('vim-denops/denops.vim')
 
-  call dein#add('Shougo/ddc-ui-native')
-  call dein#add('Shougo/ddc-source-around')
+  call dein#add('vim-denops/denops.vim')
+  call dein#add('Shougo/ddc-around')
   call dein#add('Shougo/ddc-matcher_head')
   call dein#add('Shougo/ddc-sorter_rank')
+  call dein#add('Shougo/ddc-ui-pum')
+  call dein#add('Shougo/pum.vim')
 
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvin')
-      call dein#add('roxma/nvim-yarp')
-      call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-  let g:deoplete#enable_at_startup = 1
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+  "call dein#add('Shougo/deoplete.nvim')
+  "if !has('nvin')
+  "    call dein#add('roxma/nvim-yarp')
+  "    call dein#add('roxma/vim-hug-neovim-rpc')
+  "endif
+  "let g:deoplete#enable_at_startup = 1
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
 
 
   " utility
@@ -203,6 +204,30 @@ augroup END
 "    autocmd!
 "    autocmd Syntax * if 10000 < line('$') | syntax sync minlines=100 | endif
 "augroup END
+
+" ddc
+call ddc#custom#patch_global('sources', ['around'])
+call ddc#custom#patch_global('sourceOptions', {
+            \ '_': {
+            \   'matchers': ['matcher_head'],
+            \   'sorters': ['sorter_rank'],
+            \ },
+            \ 'around': {
+            \   'mark': 'A',
+            \   'minAutoCompleteLength': 1,
+            \ }
+            \ })
+call ddc#custom#patch_global(#{
+            \   ui: 'pum',
+            \   autoCompleteEvents: [
+            \     'InsertEnter', 'TextChangedI', 'TextChangedP',
+            \   ],
+            \ })
+call ddc#enable()
+
+inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " vim-vue
 " https://qiita.com/nabewata07/items/d92655485622aeb847a8
